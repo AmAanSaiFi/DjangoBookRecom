@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Book Recommendations</title>
+</head>
+<body>
+    <h1>Book Recommendations</h1>
+    <form method="post">
+        {% csrf_token %}
+        <label for="book_name">Enter your favorite book name:</label>
+        <input type="text" id="book_name" name="book_name" required>
+        <button type="submit">Recommend Books</button>
+    </form>
+
+    {% if recommendations %}
+        <h2>Recommended Books</h2>
+        <ul>
+            {% for recommendation in recommendations %}
+                <li>{{ recommendation.title }} (Similarity Score: {{ recommendation.score:.2f }})</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No recommendations found.</p>
+    {% endif %}
+</body>
+</html>
